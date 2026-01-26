@@ -10,8 +10,6 @@ px.defaults.template = "plotly_white"
 st.title("🎬 Netflix Movies & TV Shows Dashboard")
 st.caption("Interactive analysis of Netflix content trends (filters + visuals).")
 
-@st.cache_data
-import os
 
 @st.cache_data
 def load_data():
