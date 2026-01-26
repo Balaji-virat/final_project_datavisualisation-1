@@ -11,21 +11,23 @@ st.title("🎬 Netflix Movies & TV Shows Dashboard")
 st.caption("Interactive analysis of Netflix content trends (filters + visuals).")
 
 @st.cache_data
+import os
+
+@st.cache_data
 def load_data():
-    df = pd.read_csv("netflix_titles.csv")
+    csv_path = os.path.join(os.path.dirname(__file__), "netflix_titles.csv")
+    df = pd.read_csv(csv_path)
 
-
-    # Clean date
     df["date_added"] = pd.to_datetime(df["date_added"], errors="coerce")
     df = df.dropna(subset=["date_added"]).copy()
     df["year_added"] = df["date_added"].dt.year
 
-    # Clean country/genre
     df["country"] = df["country"].fillna("Unknown")
     df["listed_in"] = df["listed_in"].fillna("Unknown")
     df["rating"] = df["rating"].fillna("Unknown")
 
     return df
+
 
 df = load_data()
 
